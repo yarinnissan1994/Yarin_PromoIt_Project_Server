@@ -12,6 +12,6 @@ namespace PromoItServer.model
         public string Name { set; get; }
         public string Email { set; get; }
         public string WebsiteURL { set; get; }
-        public byte[] MyImage { get; set; }
+        public string MyImage { get; set; }
     }
 }

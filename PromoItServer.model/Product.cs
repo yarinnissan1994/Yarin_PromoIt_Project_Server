@@ -14,6 +14,6 @@ namespace PromoItServer.model
         public int UnitsInStock { set; get; }
         public int BCCode { set; get; }
         public int CampaignCode { set; get; }
-        public byte[] MyImage { get; set; }
+        public string MyImage { get; set; }
     }
 }

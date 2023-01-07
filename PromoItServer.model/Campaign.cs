@@ -14,7 +14,7 @@ namespace PromoItServer.model
         public string LandingPageURL { set; get; }
         public string HashTag { set; get; }
         public int NPOCode { set; get; }
-        public byte[] MyImage { get; set; }
+        public string MyImage { get; set; }
         public bool IsActive { set; get; }
     }
 }

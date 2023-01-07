@@ -50,6 +50,7 @@
     <Compile Include="RegisterApplication.cs" />
     <Compile Include="SocialActivist.cs" />
     <Compile Include="Tweet.cs" />
+    <Compile Include="UserMessage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

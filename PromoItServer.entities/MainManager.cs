@@ -15,6 +15,6 @@ namespace PromoItServer.entities
         private static readonly MainManager insance = new MainManager();
         public static MainManager Instance { get { return insance; } }
 
-        public RegisterApplicationsManager RegisterApplicationsM = new RegisterApplicationsManager();
+        public UsersManager UsersM = new UsersManager();
     }
 }

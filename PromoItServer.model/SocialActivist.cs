@@ -14,6 +14,6 @@ namespace PromoItServer.model
         public string Address { set; get; }
         public string PhoneNumber { set; get; }
         public decimal MoneyStatus { set; get; }
-        public byte[] MyImage { get; set; }
+        public string MyImage { get; set; }
     }
 }

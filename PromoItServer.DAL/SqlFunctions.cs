@@ -12,7 +12,7 @@ namespace PromoItServer.DAL
 {
     public class SqlFunctions
     {
-        static string connectionString;
+        public static string connectionString;
         public static void ConnectionStringInit(string ConnectionString)
         {
             connectionString = ConnectionString;
@@ -51,6 +51,23 @@ namespace PromoItServer.DAL
             }
             return rowsAffected;
         }
+        public static void WriteWithValuesToDB(string query, Dictionary<string, object> parameters)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    foreach (KeyValuePair<string, object> param in parameters)
+                    {
+                        command.Parameters.AddWithValue(param.Key, param.Value);
+                    }
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
         public static object ReadScalarFromDB(string SqlQuery)
         {
             object answer;
@@ -65,7 +82,7 @@ namespace PromoItServer.DAL
             }
             return answer;
         }
-        public DataTable ReadTableFromDB(string sqlQuery)
+        public static DataTable ReadTableFromDB(string sqlQuery)
         {
             SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, connectionString);
 
