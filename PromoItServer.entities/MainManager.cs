@@ -16,5 +16,6 @@ namespace PromoItServer.entities
         public static MainManager Instance { get { return insance; } }
 
         public UsersManager UsersM = new UsersManager();
+        public CampaignsManager CampaignsM = new CampaignsManager();
     }
 }

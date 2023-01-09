@@ -62,5 +62,10 @@ namespace PromoItServer.DataSql
             string updateQuery = "update Register_Applications set Is_Aproved = 1 where code = '" + userCode + "'";
             PromoItServer.DAL.SqlFunctions.WriteToDB(updateQuery);
         }
+        public void SendUserMessageQuery(UserMessage data)
+        {
+            string sqlQuery = "insert into Contact_Us values('" + data.Name + "','" + data.Message + "','" + data.Phone + "','" + data.Email + "',getdate())";
+            PromoItServer.DAL.SqlFunctions.WriteToDB(sqlQuery);
+        }
     }
 }

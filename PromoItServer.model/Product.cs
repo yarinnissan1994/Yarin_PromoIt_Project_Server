@@ -10,6 +10,7 @@ namespace PromoItServer.model
     {
         public int Code { set; get; }
         public string Name { set; get; }
+        public string Description { set; get; }
         public decimal Price { set; get; }
         public int UnitsInStock { set; get; }
         public int BCCode { set; get; }

@@ -8,9 +8,9 @@ namespace PromoItServer.model
 {
     public class UserMessage
     {
-        public string name { set; get; }
-        public string message { set; get; }
-        public string email { set; get; }
-        public string phone { set; get; }
+        public string Name { set; get; }
+        public string Message { set; get; }
+        public string Email { set; get; }
+        public string Phone { set; get; }
     }
 }

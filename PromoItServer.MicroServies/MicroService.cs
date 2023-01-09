@@ -26,6 +26,8 @@ namespace PromoItServer.MicroServies
 
             string responseMessage;
 
+            object data;
+
             switch (action)
             {
                 case "get-role":
@@ -47,24 +49,24 @@ namespace PromoItServer.MicroServies
                 case "post-user-create":
                     if(WebVar == "NPO")
                     {
-                        NonProfitOrganization data = new NonProfitOrganization();
+                        data = new NonProfitOrganization();
                         data = System.Text.Json.JsonSerializer.Deserialize<NonProfitOrganization>(req.Body);
-                        MainManager.Instance.UsersM.SendUserToDB(data);
+                        MainManager.Instance.UsersM.SendUserToDB((NonProfitOrganization)data);
                         break;
 
                     } 
                     else if (WebVar == "BC")
                     {
-                        BuisnessCompany data = new BuisnessCompany();
+                        data = new BuisnessCompany();
                         data = System.Text.Json.JsonSerializer.Deserialize<BuisnessCompany>(req.Body);
-                        MainManager.Instance.UsersM.SendUserToDB(data);
+                        MainManager.Instance.UsersM.SendUserToDB((BuisnessCompany)data);
                         break;
                     }
                     else
                     {
-                        SocialActivist data = new SocialActivist();
+                        data = new SocialActivist();
                         data = System.Text.Json.JsonSerializer.Deserialize<SocialActivist>(req.Body);
-                        MainManager.Instance.UsersM.SendUserToDB(data);
+                        MainManager.Instance.UsersM.SendUserToDB((SocialActivist)data);
                         break;
                     }
 
@@ -76,8 +78,24 @@ namespace PromoItServer.MicroServies
                      responseMessage = JsonConvert.SerializeObject(MainManager.Instance.UsersM.GetPenddingListFromDB());
                     return new OkObjectResult(responseMessage);
 
+                case "get-campaigns":
+                    responseMessage = JsonConvert.SerializeObject(MainManager.Instance.CampaignsM.GetCampaignsFromDB());
+                    return new OkObjectResult(responseMessage);
+
                 case "post-approve-user":
                     MainManager.Instance.UsersM.ApproveUserInDB(WebVar);
+                    break;
+
+                case "post-user-message":
+                    data = new UserMessage();
+                    data = System.Text.Json.JsonSerializer.Deserialize<UserMessage>(req.Body);
+                    MainManager.Instance.UsersM.SendUserMessageToDB((UserMessage)data);
+                    break;
+
+                case "post-new-campaign":
+                    data = new Campaign();
+                    data = System.Text.Json.JsonSerializer.Deserialize<Campaign>(req.Body);
+                    MainManager.Instance.CampaignsM.SendNewCampaignToDB((Campaign)data, WebVar);
                     break;
 
                 case "get":

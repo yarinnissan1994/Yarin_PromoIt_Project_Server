@@ -1,4 +1,5 @@
 ﻿using PromoItServer.DataSql;
+using PromoItServer.model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,6 +31,11 @@ namespace PromoItServer.entities
         {
             UsersQueries usersQ = new UsersQueries();
             usersQ.ApproveUserQuery(userCode);
+        }
+        public void SendUserMessageToDB(UserMessage data)
+        {
+            UsersQueries usersQ = new UsersQueries();
+            usersQ.SendUserMessageQuery(data);
         }
     }
 }
