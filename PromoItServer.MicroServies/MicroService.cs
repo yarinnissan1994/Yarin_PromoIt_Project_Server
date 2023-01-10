@@ -98,6 +98,22 @@ namespace PromoItServer.MicroServies
                     MainManager.Instance.CampaignsM.SendNewCampaignToDB((Campaign)data, WebVar);
                     break;
 
+                case "post-updated-campaign":
+                    data = new Campaign();
+                    data = System.Text.Json.JsonSerializer.Deserialize<Campaign>(req.Body);
+                    MainManager.Instance.CampaignsM.SendUpdatedCampaignToDB((Campaign)data, WebVar);
+                    break;
+
+                case "post-campaign-is-active":
+                    MainManager.Instance.CampaignsM.ToggleCampaignIsActive(WebVar);
+                    break;
+
+                case "post-new-campaign-product":
+                    data = new Product();
+                    data = System.Text.Json.JsonSerializer.Deserialize<Product>(req.Body);
+                    MainManager.Instance.ProductsM.SendNewCampaignProductToDB((Product)data, WebVar);
+                    break;
+
                 case "get":
                     break;
 
