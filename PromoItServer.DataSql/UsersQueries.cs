@@ -11,6 +11,23 @@ namespace PromoItServer.DataSql
 {
     public class UsersQueries
     {
+        public DataTable GetUserInfoQuery(string Email, string Role)
+        {
+            string penddingListQuery;
+            if (Role == "NPO")
+            {
+                penddingListQuery = "select * from Non_Profit_Organizations where Email = '" + Email + "'";
+            }
+            else if(Role == "BC")
+            {
+                penddingListQuery = "select * from Buisness_Companies where Email = '" + Email + "'";
+            }
+            else
+            {
+                penddingListQuery = "select * from Social_Activist where Email = '" + Email + "'";
+            }
+            return PromoItServer.DAL.SqlFunctions.ReadTableFromDB(penddingListQuery);
+        }
         public bool? getPenddingQuery(string email)
         {
             string isAprovedQuery = "select Is_Aproved from Register_Applications where Email like '" + email + "'";
@@ -66,6 +83,16 @@ namespace PromoItServer.DataSql
         {
             string sqlQuery = "insert into Contact_Us values('" + data.Name + "','" + data.Message + "','" + data.Phone + "','" + data.Email + "',getdate())";
             PromoItServer.DAL.SqlFunctions.WriteToDB(sqlQuery);
+        }
+        public void SendMoneyStatusQuery(decimal moneyStatus, int SACode)
+        {
+            string updateQuery = "update Social_Activist set Money_Status = @MoneyStatus where Code = @SACode";
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                    { "@MoneyStatus", moneyStatus},
+                    { "@SACode", SACode},
+            };
+                PromoItServer.DAL.SqlFunctions.WriteWithValuesToDB(updateQuery, parameters);
         }
     }
 }

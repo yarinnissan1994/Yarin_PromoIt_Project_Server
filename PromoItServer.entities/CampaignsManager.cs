@@ -17,10 +17,10 @@ namespace PromoItServer.entities
             campaignsQ.NewCampaignQuery(data, userEmail);
         }
 
-        public void SendUpdatedCampaignToDB(Campaign data, string userEmail)
+        public void SendUpdatedCampaignToDB(Campaign data)
         {
             CampaignsQueries campaignsQ = new CampaignsQueries();
-            campaignsQ.UpdateCampaignQuery(data, userEmail);
+            campaignsQ.UpdateCampaignQuery(data);
         }
 
         public DataTable GetCampaignsFromDB()

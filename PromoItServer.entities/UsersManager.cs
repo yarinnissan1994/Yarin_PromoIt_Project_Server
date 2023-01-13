@@ -12,6 +12,11 @@ namespace PromoItServer.entities
 {
     public class UsersManager
     {
+        public DataTable getUserInfoFromDB(string Email, string Role)
+        {
+            UsersQueries usersQ = new UsersQueries();
+            return usersQ.GetUserInfoQuery(Email, Role);
+        }
         public bool? getPenddingFromDB(string email)
         {
             UsersQueries usersQ = new UsersQueries();
@@ -36,6 +41,11 @@ namespace PromoItServer.entities
         {
             UsersQueries usersQ = new UsersQueries();
             usersQ.SendUserMessageQuery(data);
+        }
+        public void SendMoneyStatusToDB(decimal moneyStatus, int SACode)
+        {
+            UsersQueries usersQ = new UsersQueries();
+            usersQ.SendMoneyStatusQuery(moneyStatus, SACode);
         }
     }
 }

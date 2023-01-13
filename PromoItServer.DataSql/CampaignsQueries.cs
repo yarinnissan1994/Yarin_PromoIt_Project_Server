@@ -16,7 +16,7 @@ namespace PromoItServer.DataSql
             PromoItServer.DAL.SqlFunctions.WriteToDB(insertCampaignQuery);
         }
 
-        public void UpdateCampaignQuery(Campaign data, string userEmail)
+        public void UpdateCampaignQuery(Campaign data)
         {
             string insertCampaignQuery = "declare @NPO_code int\r\nselect @NPO_code = (select Code from Non_Profit_Organizations where Email='NPO@gmail.com')\r\nupdate Campaigns set Name='"+data.Name+"', Email='"+data.Email+"', Description='"+data.Description+"', Landing_Page_URL='"+data.LandingPageURL+"',\r\nHashTag='"+data.HashTag+"', Image='"+data.MyImage+"' where Code="+data.Code+"";
             PromoItServer.DAL.SqlFunctions.WriteToDB(insertCampaignQuery);

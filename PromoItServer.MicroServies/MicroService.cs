@@ -19,8 +19,8 @@ namespace PromoItServer.MicroServies
     {
         [FunctionName("MicroService")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", "delete", Route = "service/{action}/{WebVar?}")] HttpRequest req,
-            string action, string WebVar, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", "delete", Route = "service/{action}/{WebVar?}/{WebVar2?}")] HttpRequest req,
+            string action, string WebVar, string WebVar2, ILogger log)
         {
             string requestBody;
 
@@ -70,6 +70,10 @@ namespace PromoItServer.MicroServies
                         break;
                     }
 
+                case "get-user-info":
+                    responseMessage = JsonConvert.SerializeObject(MainManager.Instance.UsersM.getUserInfoFromDB(WebVar, WebVar2));
+                    return new OkObjectResult(responseMessage);
+
                 case "get-pendding":
                     responseMessage = System.Text.Json.JsonSerializer.Serialize(MainManager.Instance.UsersM.getPenddingFromDB(WebVar));
                     return new OkObjectResult(responseMessage);
@@ -82,8 +86,21 @@ namespace PromoItServer.MicroServies
                     responseMessage = JsonConvert.SerializeObject(MainManager.Instance.CampaignsM.GetCampaignsFromDB());
                     return new OkObjectResult(responseMessage);
 
+                case "get-products":
+                    responseMessage = JsonConvert.SerializeObject(MainManager.Instance.ProductsM.GetCampaignProductsFromDB());
+                    return new OkObjectResult(responseMessage);
+
+
+                case "get-orders":
+                    responseMessage = JsonConvert.SerializeObject(MainManager.Instance.ProductsM.GetOrdersFromDB());
+                    return new OkObjectResult(responseMessage);
+
                 case "post-approve-user":
                     MainManager.Instance.UsersM.ApproveUserInDB(WebVar);
+                    break;
+
+                case "post-order-shipped":
+                    MainManager.Instance.ProductsM.ApproveOrderShippedInDB(WebVar);
                     break;
 
                 case "post-user-message":
@@ -101,7 +118,7 @@ namespace PromoItServer.MicroServies
                 case "post-updated-campaign":
                     data = new Campaign();
                     data = System.Text.Json.JsonSerializer.Deserialize<Campaign>(req.Body);
-                    MainManager.Instance.CampaignsM.SendUpdatedCampaignToDB((Campaign)data, WebVar);
+                    MainManager.Instance.CampaignsM.SendUpdatedCampaignToDB((Campaign)data);
                     break;
 
                 case "post-campaign-is-active":
@@ -112,6 +129,22 @@ namespace PromoItServer.MicroServies
                     data = new Product();
                     data = System.Text.Json.JsonSerializer.Deserialize<Product>(req.Body);
                     MainManager.Instance.ProductsM.SendNewCampaignProductToDB((Product)data, WebVar);
+                    break;
+
+                case "post-updated-campaign-product":
+                    data = new Product();
+                    data = System.Text.Json.JsonSerializer.Deserialize<Product>(req.Body);
+                    MainManager.Instance.ProductsM.SendUpdatedCampaignProductToDB((Product)data);
+                    break;
+
+                case "post-donate-details":
+                    data = new Order();
+                    data = System.Text.Json.JsonSerializer.Deserialize<Order>(req.Body);
+                    MainManager.Instance.ProductsM.SendDonateDetailsToDB((Order)data, (int.Parse(WebVar)));
+                    break;
+                case "post-sa-money-status":
+                    data = System.Text.Json.JsonSerializer.Deserialize<decimal>(req.Body);
+                    MainManager.Instance.UsersM.SendMoneyStatusToDB((decimal)data, (int.Parse(WebVar)));
                     break;
 
                 case "get":
