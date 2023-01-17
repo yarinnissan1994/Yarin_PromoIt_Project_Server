@@ -18,5 +18,7 @@ namespace PromoItServer.entities
         public UsersManager UsersM = new UsersManager();
         public CampaignsManager CampaignsM = new CampaignsManager();
         public ProductsManager ProductsM = new ProductsManager();
+        public ReportsManager ReportsM = new ReportsManager();
+        public TwitterManager TwitterM = new TwitterManager();
     }
 }

@@ -8,7 +8,7 @@ namespace PromoItServer.model
 {
     public class Campaign
     {
-        public int Code { set; get; }
+        public int? Code { set; get; }
         public string Name { set; get; }
         public string Email { set; get; }
         public string Description { set; get; }

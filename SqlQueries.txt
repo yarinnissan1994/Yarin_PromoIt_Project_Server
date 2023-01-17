@@ -1,0 +1,61 @@
+----יצירת טבלת ארגונים ללא מטרת רווח
+create table Non_Profit_Organizations(Code int primary key identity, 
+Name nvarchar(max), Email nvarchar(max), Website_URL nvarchar(max),
+Image nvarchar(MAX))
+
+----יצירת טבלת חברות עסקים
+create table Buisness_Companies(Code int primary key identity, 
+Name nvarchar(max), Email nvarchar(max), Image nvarchar(MAX))
+
+----יצירת טבלת פעילים חברתיים
+create table Social_Activist(Code int primary key identity, 
+Name nvarchar(max), Email nvarchar(max), Address nvarchar(max), 
+Phone_Number nvarchar(max), Money_Status money, Image nvarchar(MAX), Tweeter_Name nvarchar(MAX))
+
+----יצירת טבלת קמפיינים
+create table Campaigns(Code int primary key identity, 
+Name nvarchar(max), Email nvarchar(max), Description nvarchar(max),
+Landing_Page_URL nvarchar(max), HashTag nvarchar(max), 
+NPO_code int foreign key references Non_Profit_Organizations (code), Image nvarchar(MAX), 
+Is_Active bit)
+
+ ----יצירת טבלת ציוצים
+create table Tweets(Code int primary key identity, 
+SA_code int foreign key references Social_Activist (code),
+Campaign_code int foreign key references Campaigns (code),
+HashTag nvarchar(max), Landing_Page_URL nvarchar(max),
+Tweet_Content nvarchar(max), Tweet_Time datetime, Tweet_id nvarchar(max))
+
+ ----יצירת טבלת מוצרים
+create table Products(Code int primary key identity, 
+Name nvarchar(max), Description nvarchar(max), Price money, Units_In_Stock int, 
+BC_code int foreign key references Buisness_Companies (code),
+Campaign_code int foreign key references Campaigns (code), Image nvarchar(MAX))
+
+ ----יצירת טבלת הזמנות
+create table Orders(Code int primary key identity, 
+SA_code int foreign key references Social_Activist (code),
+BC_code int foreign key references Buisness_Companies (code),
+Campaign_code int foreign key references Campaigns (code),
+Product_code int foreign key references Products (code),
+Order_Time datetime, is_Sent bit)
+
+----יצירת טבלת בקשות הרשמה
+create table Register_Applications(Code int primary key identity, 
+Name nvarchar(max), Email nvarchar(max), Role_Request nvarchar(max),
+Is_Aproved bit)
+
+----יצירת טבלת הודעות משתמשים
+create table Contact_Us(Code int primary key identity, 
+Name nvarchar(max), Message nvarchar(max), Phone nvarchar(max), 
+Email nvarchar(max),  date datetime)
+
+select * from Register_Applications
+select * from Non_Profit_Organizations
+select * from Buisness_Companies
+select * from Social_Activist
+select * from Campaigns
+select * from Tweets
+select * from Products
+select * from Orders
+select * from Contact_Us

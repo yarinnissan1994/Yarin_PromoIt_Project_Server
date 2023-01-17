@@ -45,6 +45,8 @@
     <Compile Include="MainManager.cs" />
     <Compile Include="ProductsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportsManager.cs" />
+    <Compile Include="TwitterManager.cs" />
     <Compile Include="UsersManager.cs" />
   </ItemGroup>
   <ItemGroup>

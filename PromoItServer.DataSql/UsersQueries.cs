@@ -60,7 +60,7 @@ namespace PromoItServer.DataSql
                 string registerQuery = "insert into Register_Applications values ('" + SAUser.Name + "', '" + SAUser.Email + "', 'SA', 0)";
                 PromoItServer.DAL.SqlFunctions.WriteToDB(registerQuery);
 
-                string addToBCQuery = "insert into Social_Activist values ('" + SAUser.Name + "', '" + SAUser.Email + "', '" + SAUser.Address + "', '" + SAUser.PhoneNumber + "', @MoneyStatus, '" + SAUser.MyImage + "')";
+                string addToBCQuery = "insert into Social_Activist values ('" + SAUser.Name + "', '" + SAUser.Email + "', '" + SAUser.Address + "', '" + SAUser.PhoneNumber + "', @MoneyStatus, '" + SAUser.MyImage + "', '" + SAUser.TwitterName + "')";
                 decimal money = 0;
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -73,6 +73,11 @@ namespace PromoItServer.DataSql
         {
             string penddingListQuery = "select * from Register_Applications where Is_Aproved = 0";
             return PromoItServer.DAL.SqlFunctions.ReadTableFromDB(penddingListQuery);
+        }
+        public DataTable GetSADonationsQuery(string SACode)
+        {
+            string SADonationsQuery = "SELECT Products.Name as 'Product_Name', Products.Price as 'Price', COUNT(Orders.Code) as 'Donation_Count', \r\nProducts.Price*COUNT(Orders.Code) as 'Total_Price', Campaigns.Name as 'Campaign_Name'\r\nFROM Orders\r\nJOIN Products ON Products.Code = Orders.Product_code\r\nJOIN Campaigns ON Orders.Campaign_code = Campaigns.Code\r\nWHERE Orders.SA_code = "+ SACode + "\r\nGROUP BY Products.Name, Products.Price, Campaigns.Name;";
+            return PromoItServer.DAL.SqlFunctions.ReadTableFromDB(SADonationsQuery);
         }
         public void ApproveUserQuery(string userCode)
         {

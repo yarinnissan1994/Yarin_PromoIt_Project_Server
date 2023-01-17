@@ -45,6 +45,8 @@
     <Compile Include="GeneralQueries.cs" />
     <Compile Include="ProductsQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportsQueries.cs" />
+    <Compile Include="TwitterQueries.cs" />
     <Compile Include="UsersQueries.cs" />
   </ItemGroup>
   <ItemGroup>

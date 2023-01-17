@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromoItServer.model", "Prom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromoItServer.entities", "PromoItServer.entities\PromoItServer.entities.csproj", "{B41347E1-F5FF-414A-AA08-CA7A89127523}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromoItServer.MicroService", "PromoItServer.MicroServies\PromoItServer.MicroService.csproj", "{C94BE766-B0C7-4205-9C9F-D1CAC461994D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PromoItServer.MicroService", "PromoItServer.MicroServies\PromoItServer.MicroService.csproj", "{C94BE766-B0C7-4205-9C9F-D1CAC461994D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

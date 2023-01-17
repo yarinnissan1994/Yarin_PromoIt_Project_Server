@@ -10,10 +10,11 @@ namespace PromoItServer.model
     {
         public int Code { set; get; }
         public int SACode { set; get; }
-        public int CampaignCode { set; get; }
+        public int? CampaignCode { set; get; }
         public string HashTag { set; get; }
         public string LandingPageURL { set; get; }
         public string TweetContent { set; get; }
         public DateTime TweetTime { set; get; }
+        public string TweetId{ set; get;}
     }
 }

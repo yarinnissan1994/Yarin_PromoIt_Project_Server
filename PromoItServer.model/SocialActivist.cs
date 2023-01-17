@@ -15,5 +15,6 @@ namespace PromoItServer.model
         public string PhoneNumber { set; get; }
         public decimal MoneyStatus { set; get; }
         public string MyImage { get; set; }
+        public string TwitterName { set; get; }
     }
 }

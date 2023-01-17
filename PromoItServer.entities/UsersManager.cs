@@ -32,6 +32,11 @@ namespace PromoItServer.entities
             UsersQueries usersQ = new UsersQueries();
             return usersQ.GetPenddingListQuery();
         }
+        public DataTable GetSADonationsFromDB(string SACode)
+        {
+            UsersQueries usersQ = new UsersQueries();
+            return usersQ.GetSADonationsQuery(SACode);
+        }
         public void ApproveUserInDB(string userCode)
         {
             UsersQueries usersQ = new UsersQueries();
