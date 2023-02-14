@@ -39,8 +39,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Utilities_CS">
+      <HintPath>..\..\Utilities_CS\Utilities_CS\bin\Debug\net7.0\Utilities_CS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDataSql.cs" />
     <Compile Include="CampaignsQueries.cs" />
     <Compile Include="GeneralQueries.cs" />
     <Compile Include="ProductsQueries.cs" />

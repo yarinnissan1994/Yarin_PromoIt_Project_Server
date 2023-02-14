@@ -1,24 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using PromoItServer.DataSql;
+using PromoItServer.model;
 using System.Threading.Tasks;
+using Utilities_CS;
 
 namespace PromoItServer.entities
 {
     public class MainManager
     {
-        private MainManager() 
+        private MainManager()
         {
-            DataSql.GeneralQueries.ConnectionInit();
+            init();
+            Logger.LogEvent("Program Started!");
         }
+
         private static readonly MainManager insance = new MainManager();
         public static MainManager Instance { get { return insance; } }
 
-        public UsersManager UsersM = new UsersManager();
-        public CampaignsManager CampaignsM = new CampaignsManager();
-        public ProductsManager ProductsM = new ProductsManager();
-        public ReportsManager ReportsM = new ReportsManager();
-        public TwitterManager TwitterM = new TwitterManager();
+        public void init() 
+        { 
+            Logger = new Log("File");
+            Config = new ConfigClass();
+            CommmandM = new CommandManager(Logger);
+            GeneralQ = new GeneralQueries(Logger, Config);
+            CampaignsM = new CampaignsManager(Logger);
+            ProductsM = new ProductsManager(Logger);
+            ReportsM = new ReportsManager(Logger);
+            TwitterM = new TwitterManager(Logger);
+            UsersM = new UsersManager(Logger);
+            GeneralQ.LogInit();
+            GeneralQ.ConnectionInit();
+            GeneralQ.ConfigInit();
+            TwitterM.StartTwitterUpdaterTask();
+        }
+        public Log Logger;
+        public ConfigClass Config;
+        public GeneralQueries GeneralQ;
+        public CommandManager CommmandM;
+        public CampaignsManager CampaignsM;
+        public ProductsManager ProductsM;
+        public ReportsManager ReportsM;
+        public TwitterManager TwitterM;
+        public UsersManager UsersM;
+        
+        
     }
 }

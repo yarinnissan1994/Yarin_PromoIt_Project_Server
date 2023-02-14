@@ -1,55 +1,53 @@
 ﻿using PromoItServer.DataSql;
 using PromoItServer.model;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using System.Threading.Tasks;
+using Utilities_CS;
 
 namespace PromoItServer.entities
 {
-    public class UsersManager
+    public class UsersManager : BaseEntity
     {
+        public UsersManager(Log Logger) : base(Logger) { usersQ = new UsersQueries(Logger); }
+        UsersQueries usersQ;
         public DataTable getUserInfoFromDB(string Email, string Role)
         {
-            UsersQueries usersQ = new UsersQueries();
+            Log.LogEvent("getUserInfoFromDB function was called");
             return usersQ.GetUserInfoQuery(Email, Role);
         }
         public bool? getPenddingFromDB(string email)
         {
-            UsersQueries usersQ = new UsersQueries();
+            Log.LogEvent("getPenddingFromDB function was called");
             return usersQ.getPenddingQuery(email);
         }
         public void SendUserToDB(object data)
         {
-            UsersQueries usersQ = new UsersQueries();
+            Log.LogEvent("SendUserToDB function was called");
             usersQ.ConvertUserToSqlQuery(data);
         }
         public DataTable GetPenddingListFromDB()
         {
-            UsersQueries usersQ = new UsersQueries();
+            Log.LogEvent("GetPenddingListFromDB function was called");
             return usersQ.GetPenddingListQuery();
         }
         public DataTable GetSADonationsFromDB(string SACode)
         {
-            UsersQueries usersQ = new UsersQueries();
+            Log.LogEvent("GetSADonationsFromDB function was called");
             return usersQ.GetSADonationsQuery(SACode);
         }
         public void ApproveUserInDB(string userCode)
         {
-            UsersQueries usersQ = new UsersQueries();
+            Log.LogEvent("ApproveUserInDB function was called");
             usersQ.ApproveUserQuery(userCode);
         }
         public void SendUserMessageToDB(UserMessage data)
         {
-            UsersQueries usersQ = new UsersQueries();
+            Log.LogEvent("SendUserMessageToDB function was called");
             usersQ.SendUserMessageQuery(data);
         }
         public void SendMoneyStatusToDB(decimal moneyStatus, int SACode)
         {
-            UsersQueries usersQ = new UsersQueries();
+            Log.LogEvent("SendMoneyStatusToDB function was called");
             usersQ.SendMoneyStatusQuery(moneyStatus, SACode);
         }
     }

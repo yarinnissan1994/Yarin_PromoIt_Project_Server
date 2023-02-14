@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 using System.Threading.Tasks;
+using Utilities_CS;
 
 namespace PromoItServer.DataSql
 {
-    public class ReportsQueries
+    public class ReportsQueries : BaseDataSql
     {
+        public ReportsQueries(Log Logger) : base(Logger) { }
         public DataTable GetReportQuery(string type)
         {
+            Log.LogEvent("GetReportQuery function was called");
             string getReportQuery;
                 switch (type)
             {

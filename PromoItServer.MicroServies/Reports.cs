@@ -6,27 +6,25 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PromoItServer.entities;
 using System;
-using System.IO;
 using System.Threading.Tasks;
-using Tweetinvi;
 
 namespace PromoItServer.MicroService
 {
-    public static class Twitter
+    public static class Reports
     {
-        [FunctionName("Twitter")]
+        [FunctionName("Reports")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "twitter/{action}")] HttpRequest req, string action, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", "delete", Route = "reports/{action}/{WebVar?}")] HttpRequest req,
+            string action, string WebVar, ILogger log)
         {
             //MainManager.Instance.Logger.LogEvent($"client called server to execute {action} command");
             try
             {
-                string requestBody = await req.ReadAsStringAsync();
-                (string response, object result) = MainManager.Instance.CommmandM.CommandList[action].Run(action, requestBody);
+                (string response, object result) = MainManager.Instance.CommmandM.CommandList[action].Run(action, WebVar);
                 switch (response)
                 {
-                    case "success":
-                        break;
+                    case "OkObjectResult":
+                        return new OkObjectResult(result);
                     case "BadRequestObjectResult":
                         return new BadRequestObjectResult(result);
                     default:
@@ -37,7 +35,10 @@ namespace PromoItServer.MicroService
             {
                 //MainManager.Instance.Logger.LogException($"exception while execute {action} command: ", ex);
             }
+
             return null;
         }
     }
 }
+
+

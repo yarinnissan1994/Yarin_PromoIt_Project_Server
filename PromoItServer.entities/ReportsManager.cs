@@ -1,18 +1,17 @@
 ﻿using PromoItServer.DataSql;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Utilities_CS;
 
 namespace PromoItServer.entities
 {
-    public class ReportsManager
+    public class ReportsManager : BaseEntity
     {
+        public ReportsManager (Log Logger) : base (Logger) { reportsQ = new ReportsQueries(Logger); }
+        ReportsQueries reportsQ;
         public DataTable GetReportFromDB(string type)
         {
-            ReportsQueries reportsQ = new ReportsQueries();
+            Log.LogEvent("GetReportFromDB function was called");
             return reportsQ.GetReportQuery(type);
         }
     }
